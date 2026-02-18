@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "pyldt"
+version = "0.1.0"
+description = "Python library for reading and writing EULUMDAT (.ldt) photometric files"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "123VincentB" }
+]
+keywords = ["photometry", "eulumdat", "ldt", "lighting", "luminaire", "ies"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/123VincentB/pyldt"
+Repository = "https://github.com/123VincentB/pyldt"
+Changelog = "https://github.com/123VincentB/pyldt/blob/main/CHANGELOG.md"
