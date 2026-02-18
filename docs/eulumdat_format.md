@@ -39,16 +39,30 @@ and the intensity table.
 | 24 | `CONV_FACTOR` | float | Conversion factor |
 | 25 | `TILT` | float | Luminaire tilt during measurement (°) |
 | 26 | `N_SETS` | int | Number of lamp sets |
-| 26a | `NUM_LAMPS` | int… | Number of lamps per set |
-| 26b | `LAMP_TYPE` | str… | Lamp type description per set |
-| 26c | `LAMP_FLUX` | float… | Total luminous flux per set (lm) |
-| 26d | `CCT` | str… | Colour temperature per set (K) |
-| 26e | `CRI` | str… | Colour rendering index per set |
-| 26f | `LAMP_WATT` | float… | Power per set (W) |
+| 26a | `NUM_LAMPS` | int × N_SETS | Number of lamps — one value per set, space-separated on a single line |
+| 26b | `LAMP_TYPE` | str × N_SETS | Lamp type description — one token per set, space-separated |
+| 26c | `LAMP_FLUX` | float × N_SETS | Total luminous flux (lm) — one value per set, space-separated |
+| 26d | `CCT` | str × N_SETS | Colour temperature (K) — one token per set, space-separated |
+| 26e | `CRI` | str × N_SETS | Colour rendering index — one token per set, space-separated |
+| 26f | `LAMP_WATT` | float × N_SETS | Power (W) — one value per set, space-separated |
 | 27–36 | `DR[1..10]` | float | Direct ratios for 10 zones (%) |
 | 37–… | C-angles | float | C-plane angles (°) |
 | …–… | γ-angles | float | γ-angles (°) |
 | …–end | Intensities | float | cd/klm, one value per line, C-plane by C-plane |
+
+### Lamp sets example
+
+For `N_SETS = 2`, lines 26a–26f each contain **2 space-separated values** — one per set. The 6 properties always occupy exactly 6 lines, regardless of N_SETS:
+
+```
+2                        ← N_SETS
+1 1                      ← NUM_LAMPS  (set 1: 1 lamp, set 2: 1 lamp)
+LED-Module LED-Module    ← LAMP_TYPE
+3500 3500                ← LAMP_FLUX  (lm)
+3000 4000                ← CCT        (K)
+80 80                    ← CRI
+18.5 18.5                ← LAMP_WATT  (W)
+```
 
 ---
 
