@@ -39,12 +39,9 @@ and the intensity table.
 | 24 | `CONV_FACTOR` | float | Conversion factor |
 | 25 | `TILT` | float | Luminaire tilt during measurement (°) |
 | 26 | `N_SETS` | int | Number of lamp sets |
-| 26a | `NUM_LAMPS` | int × N_SETS | Number of lamps — one value per set, space-separated on a single line |
-| 26b | `LAMP_TYPE` | str × N_SETS | Lamp type description — one token per set, space-separated |
-| 26c | `LAMP_FLUX` | float × N_SETS | Total luminous flux (lm) — one value per set, space-separated |
-| 26d | `CCT` | str × N_SETS | Colour temperature (K) — one token per set, space-separated |
-| 26e | `CRI` | str × N_SETS | Colour rendering index — one token per set, space-separated |
-| 26f | `LAMP_WATT` | float × N_SETS | Power (W) — one value per set, space-separated |
+| 26a–26f | Lamp set 1 | — | 6 lines: NUM_LAMPS, LAMP_TYPE, LAMP_FLUX, CCT, CRI, LAMP_WATT |
+| … | Lamp set 2 | — | Same 6 lines repeated for set 2 |
+| … | Lamp set N | — | Same 6 lines repeated for set N |
 | 27–36 | `DR[1..10]` | float | Direct ratios for 10 zones (%) |
 | 37–… | C-angles | float | C-plane angles (°) |
 | …–… | γ-angles | float | γ-angles (°) |
@@ -52,16 +49,22 @@ and the intensity table.
 
 ### Lamp sets example
 
-For `N_SETS = 2`, lines 26a–26f each contain **2 space-separated values** — one per set. The 6 properties always occupy exactly 6 lines, regardless of N_SETS:
+For `N_SETS = 2`, the lamp data occupies **12 consecutive lines** — 6 lines per set:
 
 ```
 2                        ← N_SETS
-1 1                      ← NUM_LAMPS  (set 1: 1 lamp, set 2: 1 lamp)
-LED-Module LED-Module    ← LAMP_TYPE
-3500 3500                ← LAMP_FLUX  (lm)
-3000 4000                ← CCT        (K)
-80 80                    ← CRI
-18.5 18.5                ← LAMP_WATT  (W)
+1                        ← NUM_LAMPS  set 1
+LED-Module               ← LAMP_TYPE  set 1
+3500                     ← LAMP_FLUX  set 1 (lm)
+3000                     ← CCT        set 1 (K)
+80                       ← CRI        set 1
+18.5                     ← LAMP_WATT  set 1 (W)
+1                        ← NUM_LAMPS  set 2
+LED-Module               ← LAMP_TYPE  set 2
+3500                     ← LAMP_FLUX  set 2 (lm)
+4000                     ← CCT        set 2 (K)
+80                       ← CRI        set 2
+18.5                     ← LAMP_WATT  set 2 (W)
 ```
 
 ---

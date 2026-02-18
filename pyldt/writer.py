@@ -175,7 +175,7 @@ class LdtWriter:
         lines.append(cls._fmt(h.conv_factor))
         lines.append(cls._fmt(h.tilt))
 
-        # Lamp sets
+        # Lamp sets — interpretation B: 6 lines per set
         lines.append(str(h.n_sets))
         n = max(1, h.n_sets)
 
@@ -186,12 +186,13 @@ class LdtWriter:
         lamp_cri = (h.lamp_cri + [""] * n)[:n]
         lamp_watt = (h.lamp_watt + [0.0] * n)[:n]
 
-        lines.append(" ".join(str(v) for v in num_lamps))
-        lines.append(" ".join(lamp_types))
-        lines.append(" ".join(cls._fmt(v) for v in lamp_flux))
-        lines.append(" ".join(lamp_cct))
-        lines.append(" ".join(lamp_cri))
-        lines.append(" ".join(cls._fmt(v) for v in lamp_watt))
+        for k in range(n):
+            lines.append(str(num_lamps[k]))
+            lines.append(lamp_types[k])
+            lines.append(cls._fmt(lamp_flux[k]))
+            lines.append(lamp_cct[k])
+            lines.append(lamp_cri[k])
+            lines.append(cls._fmt(lamp_watt[k]))
 
         # Direct ratios (10 values)
         dr = (h.direct_ratios + [0.0] * 10)[:10]

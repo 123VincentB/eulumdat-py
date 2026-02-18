@@ -199,20 +199,25 @@ class LdtReader:
         h.conv_factor = _to_float(pop())
         h.tilt = _to_float(pop())
 
-        # Lamp sets
+        # Lamp sets — interpretation B: 6 lines per set
+        # For N sets: set 1 (lines 27-32), set 2 (lines 33-38), etc.
         h.n_sets = _to_int(pop())
         n = max(1, h.n_sets)
 
-        def pop_tokens(n):
-            t = pop().split()
-            return (t + ["0"] * n)[:n]
+        h.num_lamps = []
+        h.lamp_types = []
+        h.lamp_flux = []
+        h.lamp_cct = []
+        h.lamp_cri = []
+        h.lamp_watt = []
 
-        h.num_lamps = [int(x) for x in pop_tokens(n)]
-        h.lamp_types = pop_tokens(n)
-        h.lamp_flux = [float(x) for x in pop_tokens(n)]
-        h.lamp_cct = pop_tokens(n)
-        h.lamp_cri = pop_tokens(n)
-        h.lamp_watt = [float(x) for x in pop_tokens(n)]
+        for _ in range(n):
+            h.num_lamps.append(_to_int(pop()))
+            h.lamp_types.append(pop())
+            h.lamp_flux.append(_to_float(pop()))
+            h.lamp_cct.append(pop())
+            h.lamp_cri.append(pop())
+            h.lamp_watt.append(_to_float(pop()))
 
         # Direct ratios (10 values)
         h.direct_ratios = pop_n_numbers(10)
