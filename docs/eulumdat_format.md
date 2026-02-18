@@ -112,31 +112,46 @@ Each set always occupies exactly 6 lines.
 
 ## Symmetry (ISYM)
 
-The ISYM field determines how many C-planes are stored in the file.
-`LdtReader` always expands the matrix to the full `[Mc × Ng]` size.
+The ISYM field declares the symmetry of the luminaire's intensity distribution.
 
-| ISYM | Meaning | Planes stored |
-|------|---------|---------------|
-| 0 | No symmetry | All Mc planes |
-| 1 | Full rotational symmetry | 1 plane (C=0°) |
-| 2 | Symmetry about C0–C180 plane | Mc/2 + 1 planes |
-| 3 | Symmetry about C90–C270 plane | Mc/2 + 1 planes (stored C270→C90) |
-| 4 | Double symmetry (quadrant) | Mc/4 + 1 planes |
+When ISYM ≠ 0, the intensity values stored in the file are **already symmetrised**
+before writing: for each pair of mirror planes, the values are averaged. This serves
+two purposes: reducing file size (fewer C-planes to store) and smoothing the measured
+distribution to eliminate measurement artefacts.
+
+`LdtReader` always expands the matrix to the full `[Mc × Ng]` size on read.
+
+| ISYM | Symmetry | Symmetrisation rule (applied before writing) | C-planes written to file |
+|------|----------|----------------------------------------------|--------------------------|
+| 0 | None | No averaging — raw measured values | C=0° to C=360°−Dc (all Mc planes) |
+| 1 | Full rotational | I_sym(γ) = average of I(C, γ) over all C-planes | C=0° only (1 plane) |
+| 2 | About C0–C180 | I_sym(C, γ) = [ I(C, γ) + I(360°−C, γ) ] / 2 | C=0° to C=180° (inclusive) |
+| 3 | About C90–C270 | I_sym(C, γ) = [ I(C, γ) + I(180°−C, γ) ] / 2 | C=270° down to C=90° *(decreasing order)* |
+| 4 | Quadrant (C0–C180 and C90–C270) | I_sym(C, γ) = average of { I(C,γ), I(360°−C,γ), I(180°−C,γ), I(180°+C,γ) } | C=0° to C=90° (inclusive) |
+
+> **ISYM=0:** Raw measured values, no averaging. This is the only mode where the full
+> asymmetry of the luminaire is preserved.
+
+> **ISYM=3 storage order:** C-planes are written in *decreasing* order from C=270° down
+> to C=90°. This specific ordering is required for correct import in DIALux and Relux —
+> using increasing order causes the intensity distribution to appear mirrored.
 
 ---
 
 ## Intensity values
 
-Intensities are tabulated in **cd/klm** (candela per kilolumen of total lamp
-flux). To convert to absolute candela, multiply by the total lamp flux in
-kilolumens:
+Intensities are tabulated in **cd/klm** (candela per kilolumen of total lamp flux).
+To convert to absolute candela, use either of the two equivalent forms:
 
 ```
+I_abs(C, γ) [cd] = I_rel(C, γ) [cd/klm] × Φ_lamp [lm] / 1000
 I_abs(C, γ) [cd] = I_rel(C, γ) [cd/klm] × Φ_lamp [klm]
 ```
 
-Values are written one per line, sweeping all γ-angles for each C-plane in
-sequence.
+> The first form is more practical since lamp flux (Φ_lamp) is typically expressed
+> in lm, not klm.
+
+Values are written one per line, sweeping all γ-angles for each C-plane in sequence.
 
 ---
 
