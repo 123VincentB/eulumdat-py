@@ -1,8 +1,52 @@
 # EULUMDAT File Format
 
-EULUMDAT is the standard file format for photometric data of luminaires,
-defined by the **LiTG** (Deutsche Lichttechnische Gesellschaft) in 1990.
-It is a plain-text, line-based format encoded in **ISO-8859-1**.
+## What is an EULUMDAT file?
+
+An EULUMDAT file is the standard digital representation of a luminaire's **photometric data**. It serves as the interface between two worlds:
+
+- **Measurement** — a goniophotometer rotates the luminaire (or a mirror system) through hundreds of angular positions and records the luminous intensity in every direction
+- **Simulation** — lighting design software such as DIALux and Relux imports the file to simulate how the luminaire will illuminate a space
+
+Without this file, a luminaire is a physical object. With it, it becomes a digital model that can be placed, aimed, and evaluated in any virtual environment.
+
+Defined by the **LiTG** (Deutsche Lichttechnische Gesellschaft) in **1990**, EULUMDAT has remained the dominant photometric file format in Europe for over three decades. Despite its age, it is still the format of choice for luminaire manufacturers, test laboratories, and lighting designers today — a testament to its simplicity and the inertia of a well-established ecosystem.
+
+From a technical standpoint, an EULUMDAT file is nothing more than a **plain text file**: every value is human-readable, the structure is line-based, and no proprietary software is needed to open or generate one. This simplicity is one of the key reasons for its longevity.
+
+### What the file contains
+
+An EULUMDAT file stores:
+
+- **Luminous intensity distribution** — the core of the file: a polar matrix of intensity values I(C, γ) in cd/klm, measured across all C-planes and γ-angles. This is the mathematical description of how the luminaire emits light in every direction.
+- **Lamp data** — rated flux (lm), power (W), colour temperature (K), colour rendering index
+- **Luminaire geometry** — physical dimensions of the luminaire and its luminous area
+- **Photometric factors** — light output ratio (LORL), downward flux fraction (DFF), direct ratios
+
+### The measurement chain
+
+```
+Goniophotometer
+      │
+      │  measures I(C, γ) in cd
+      ▼
+Photometric software
+      │
+      │  normalises to cd/klm, applies symmetry, writes .ldt file
+      ▼
+EULUMDAT file (.ldt)
+      │
+      │  imported by lighting design software
+      ▼
+DIALux / Relux / AGi32 / ...
+      │
+      │  simulates illuminance, luminance, uniformity
+      ▼
+Lighting calculation results
+```
+
+### Why cd/klm and not cd?
+
+Intensity values are stored in **cd/klm** (candela per kilolumen of rated lamp flux) rather than absolute candela. This makes the file independent of the actual lamp installed: the simulation software multiplies by the real lamp flux to obtain absolute values. It also allows the same photometric file to be used with lamps of different flux levels.
 
 ---
 
