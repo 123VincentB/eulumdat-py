@@ -55,6 +55,10 @@ Intensity values are stored in **cd/klm** (candela per kilolumen of rated lamp f
 The file consists of a fixed-structure header followed by the angular grid
 and the intensity table.
 
+> ⚠️ **Strict line-by-line format**
+>
+> The EULUMDAT format is **positional**: each piece of data must appear on the correct line, in the correct order. There is no key-value syntax, no delimiters between sections, and no tolerance for missing or reordered lines. A single missing line, extra blank line, or misplaced value will produce a file that DIALux, Relux, and other lighting software will reject or misinterpret — often without a meaningful error message.
+
 > **Note on line numbering:** Lines 1–26 are fixed. From line 27 onward, line
 > numbers shift depending on `N_SETS` (number of lamp sets). Each lamp set
 > occupies exactly 6 consecutive lines. With N sets, lamp data spans lines
