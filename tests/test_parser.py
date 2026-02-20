@@ -5,12 +5,16 @@ Run with:
     pytest tests/ -v
 
 Sample files expected in tests/samples/:
-    sample1.ldt  — Tulux,   Isym=4, Mc=144, Ng=73,  N_sets=2
-    sample2.ldt  — Regent,  Isym=2, Mc=72,  Ng=37,  N_sets=1
-    sample3.ldt  — Regent,  Isym=0, Mc=24,  Ng=37,  N_sets=1
-    sample4.ldt  — Zumtobel,Isym=4, Mc=24,  Ng=37,  N_sets=1
-    sample5.ldt  — ERCO,    Isym=1, Mc=1,   Ng=91,  N_sets=1  (UTF-8 BOM)
-    sample6.ldt  — TRILUX,  Isym=3, Mc=144, Ng=73,  N_sets=1  (empty lumcat)
+    sample1.ldt  — Tulux,    Isym=4, Mc=144, Ng=73,  N_sets=2
+    sample2.ldt  — Regent,   Isym=2, Mc=72,  Ng=37,  N_sets=1
+    sample3.ldt  — Regent,   Isym=0, Mc=24,  Ng=37,  N_sets=1
+    sample4.ldt  — Zumtobel, Isym=4, Mc=24,  Ng=37,  N_sets=1
+    sample5.ldt  — ERCO,     Isym=1, Mc=1,   Ng=91,  N_sets=1  (UTF-8 BOM)
+    sample6.ldt  — TRILUX,   Isym=3, Mc=144, Ng=73,  N_sets=1  (empty lumcat)
+    sample7.ldt  — (empty),  Isym=0, Mc=360, Ng=181, N_sets=1  (empty company, dc=dg=1°)
+    sample8.ldt  — LEDiL Oy, Isym=0, Mc=72,  Ng=181, N_sets=1  (dg=1°)
+    sample9.ldt  — Signify,  Isym=4, Mc=72,  Ng=55,  N_sets=1  (long company, dg=0)
+    sample10.ldt — Waldmann, Isym=4, Mc=24,  Ng=37,  N_sets=1
 """
 
 import tempfile
@@ -45,8 +49,7 @@ def n_stored_planes(mc: int, isym: int) -> int:
 # Smoke tests — all files parse without exception
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6])
-def test_read_no_exception(n):
+@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     """LdtReader.read() must not raise on any sample file."""
     ldt = LdtReader.read(sample(n))
     assert ldt is not None
@@ -59,12 +62,17 @@ def test_read_no_exception(n):
 # ---------------------------------------------------------------------------
 
 @pytest.mark.parametrize("n, expected", [
-    (1, {"company": "Tulux",     "isym": 4, "mc": 144, "ng": 73, "n_sets": 2}),
-    (2, {"company": "Regent",    "isym": 2, "mc": 72,  "ng": 37, "n_sets": 1}),
-    (3, {"company": "Regent",    "isym": 0, "mc": 24,  "ng": 37, "n_sets": 1}),
-    (4, {"company": "ZUMTOBEL",  "isym": 4, "mc": 24,  "ng": 37, "n_sets": 1}),
-    (5, {"company": "ERCO GmbH", "isym": 1, "mc": 1,   "ng": 91, "n_sets": 1}),
-    (6, {"company": "TRILUX",    "isym": 3, "mc": 144, "ng": 73, "n_sets": 1}),
+    (1,  {"company": "Tulux",     "isym": 4, "mc": 144, "ng": 73,  "n_sets": 2}),
+    (2,  {"company": "Regent",    "isym": 2, "mc": 72,  "ng": 37,  "n_sets": 1}),
+    (3,  {"company": "Regent",    "isym": 0, "mc": 24,  "ng": 37,  "n_sets": 1}),
+    (4,  {"company": "ZUMTOBEL",  "isym": 4, "mc": 24,  "ng": 37,  "n_sets": 1}),
+    (5,  {"company": "ERCO GmbH", "isym": 1, "mc": 1,   "ng": 91,  "n_sets": 1}),
+    (6,  {"company": "TRILUX",    "isym": 3, "mc": 144, "ng": 73,  "n_sets": 1}),
+    (7,  {"company": "",          "isym": 0, "mc": 360, "ng": 181, "n_sets": 1}),
+    (8,  {"company": "LEDiL Oy",  "isym": 0, "mc": 72,  "ng": 181, "n_sets": 1}),
+    (9,  {"company": "brand Signify, Philips/2026-02-20 Eulumdat/1   B-Tilt = 0.00",
+                                  "isym": 4, "mc": 72,  "ng": 55,  "n_sets": 1}),
+    (10, {"company": "Waldmann",  "isym": 4, "mc": 24,  "ng": 37,  "n_sets": 1}),
 ])
 def test_header_fields(n, expected):
     h = LdtReader.read(sample(n)).header
@@ -105,14 +113,14 @@ def test_lamp_sets_num_lamps_negative():
 # Angular grids
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6])
+@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_c_angles_count(n):
     """c_angles must contain exactly Mc values."""
     h = LdtReader.read(sample(n)).header
     assert len(h.c_angles) == h.mc
 
 
-@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6])
+@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_g_angles_count(n):
     """g_angles must contain exactly Ng values."""
     h = LdtReader.read(sample(n)).header
@@ -121,14 +129,14 @@ def test_g_angles_count(n):
 
 def test_c_angles_start_zero():
     """C-angles must start at 0° for Isym 0, 1, 2, 4."""
-    for n in [2, 3, 4, 5]:
+    for n in [2, 3, 4, 5, 7, 8, 9, 10]:
         h = LdtReader.read(sample(n)).header
         assert h.c_angles[0] == pytest.approx(0.0), f"sample{n}: c_angles[0] != 0"
 
 
 def test_g_angles_start_zero():
     """G-angles must start at 0°."""
-    for n in range(1, 7):
+    for n in range(1, 11):
         h = LdtReader.read(sample(n)).header
         assert h.g_angles[0] == pytest.approx(0.0), f"sample{n}: g_angles[0] != 0"
 
@@ -137,7 +145,7 @@ def test_g_angles_start_zero():
 # Intensity matrix dimensions
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6])
+@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_intensity_matrix_shape_expanded(n):
     """After expansion, intensities must be [Mc x Ng]."""
     ldt = LdtReader.read(sample(n), expand_symmetry=True)
@@ -146,7 +154,7 @@ def test_intensity_matrix_shape_expanded(n):
     assert all(len(row) == h.ng for row in ldt.intensities)
 
 
-@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6])
+@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_intensity_matrix_shape_compressed(n):
     """Without expansion, intensities must be [n_stored x Ng]."""
     ldt = LdtReader.read(sample(n), expand_symmetry=False)
@@ -156,7 +164,7 @@ def test_intensity_matrix_shape_compressed(n):
     assert all(len(row) == h.ng for row in ldt.intensities)
 
 
-@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6])
+@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_intensity_values_non_negative(n):
     """All intensity values must be >= 0."""
     ldt = LdtReader.read(sample(n))
@@ -202,17 +210,49 @@ def test_isym4_stored_planes():
     assert len(ldt.intensities) == h.mc // 4 + 1  # 7
 
 
-def test_isym1_stored_planes():
-    """sample5 (Isym=1, Mc=1): must store exactly 1 plane."""
-    ldt = LdtReader.read(sample(5), expand_symmetry=False)
-    assert len(ldt.intensities) == 1
+def test_empty_company():
+    """sample7: empty company field (L1) must be read as empty string without shifting fields."""
+    h = LdtReader.read(sample(7)).header
+    assert h.company == ""
+    assert h.isym == 0
+    assert h.mc == 360
+    assert h.ng == 181
+
+
+def test_large_matrix():
+    """sample7: Mc=360, Ng=181 — largest possible full-sphere matrix at 1° resolution."""
+    ldt = LdtReader.read(sample(7))
+    assert len(ldt.intensities) == 360
+    assert len(ldt.intensities[0]) == 181
+
+
+def test_ng_181():
+    """sample8: Ng=181 with dg=1° covers γ from 0° to 180° inclusive."""
+    h = LdtReader.read(sample(8)).header
+    assert h.ng == 181
+    assert h.dg == pytest.approx(1.0)
+    assert h.g_angles[-1] == pytest.approx(180.0)
+
+
+def test_long_company_field():
+    """sample9 (Signify): company field with embedded metadata must be read verbatim."""
+    h = LdtReader.read(sample(9)).header
+    assert "Signify" in h.company
+    assert "Philips" in h.company
+
+
+def test_dg_zero():
+    """sample9: dg=0.0 is a valid (if unusual) value and must not cause errors."""
+    h = LdtReader.read(sample(9)).header
+    assert h.dg == pytest.approx(0.0)
+    assert h.ng == 55
 
 
 # ---------------------------------------------------------------------------
 # Round-trip tests
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6])
+@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_roundtrip_header(n, tmp_path):
     """Write then re-read: all header scalar fields must be identical."""
     ldt1 = LdtReader.read(sample(n))
@@ -234,7 +274,7 @@ def test_roundtrip_header(n, tmp_path):
     assert h1.luminaire_number == h2.luminaire_number
 
 
-@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6])
+@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_roundtrip_intensities(n, tmp_path):
     """Write then re-read: intensity matrix must match within 1e-5 (float formatting loss)."""
     ldt1 = LdtReader.read(sample(n))
@@ -250,7 +290,7 @@ def test_roundtrip_intensities(n, tmp_path):
             )
 
 
-@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6])
+@pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 def test_roundtrip_matrix_shape(n, tmp_path):
     """Write then re-read: matrix shape must be preserved."""
     ldt1 = LdtReader.read(sample(n))
