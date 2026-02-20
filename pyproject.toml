@@ -30,3 +30,9 @@ dependencies = []
 Homepage = "https://github.com/123VincentB/pyldt"
 Repository = "https://github.com/123VincentB/pyldt"
 Changelog = "https://github.com/123VincentB/pyldt/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
