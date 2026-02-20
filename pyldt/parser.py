@@ -55,7 +55,7 @@ class LdtReader:
         if isym == 2:
             return (1, mc // 2 + 1)
         if isym == 3:
-            return (1, mc)
+            return (1, mc // 2 + 1)
         if isym == 4:
             return (1, mc // 4 + 1)
         return (1, mc)
@@ -142,12 +142,24 @@ class LdtReader:
             ValueError: If the file cannot be parsed.
         """
         path = Path(path)
-        text = path.read_text(encoding="utf-8", errors="ignore")
+        raw = path.read_bytes()
+        if raw[:3] == b"\xef\xbb\xbf":  # UTF-8 BOM
+            raw = raw[3:]
+        text = raw.decode("latin-1")
         lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
         i = 0
 
+        def pop_raw():
+            """Return the next line as-is (preserves empty lines for text fields)."""
+            nonlocal i
+            if i >= len(lines):
+                return ""
+            v = lines[i].strip()
+            i += 1
+            return v
+
         def pop():
-            """Return the next non-empty line."""
+            """Return the next non-empty line (for numeric fields)."""
             nonlocal i
             v = ""
             while i < len(lines) and v == "":
@@ -168,19 +180,19 @@ class LdtReader:
 
         h = LdtHeader()
 
-        # Lines 1-12 : Identification
-        h.company = pop()
-        h.ityp = _to_int(pop())
-        h.isym = _to_int(pop())
-        h.mc = _to_int(pop())
-        h.dc = _to_float(pop())
-        h.ng = _to_int(pop())
-        h.dg = _to_float(pop())
-        h.report_number = pop()
-        h.luminaire_name = pop()
-        h.luminaire_number = pop()
-        h.file_name = pop()
-        h.date_user = pop()
+        # Lines 1-12 : Identification (pop_raw: empty lines are valid values)
+        h.company = pop_raw()
+        h.ityp = _to_int(pop_raw())
+        h.isym = _to_int(pop_raw())
+        h.mc = _to_int(pop_raw())
+        h.dc = _to_float(pop_raw())
+        h.ng = _to_int(pop_raw())
+        h.dg = _to_float(pop_raw())
+        h.report_number = pop_raw()
+        h.luminaire_name = pop_raw()
+        h.luminaire_number = pop_raw()   # can be empty string
+        h.file_name = pop_raw()
+        h.date_user = pop_raw()
 
         # Lines 13-22 : Geometry
         h.length = _to_float(pop())
@@ -212,12 +224,12 @@ class LdtReader:
         h.lamp_watt = []
 
         for _ in range(n):
-            h.num_lamps.append(_to_int(pop()))
-            h.lamp_types.append(pop())
-            h.lamp_flux.append(_to_float(pop()))
-            h.lamp_cct.append(pop())
-            h.lamp_cri.append(pop())
-            h.lamp_watt.append(_to_float(pop()))
+            h.num_lamps.append(_to_int(pop_raw()))
+            h.lamp_types.append(pop_raw())
+            h.lamp_flux.append(_to_float(pop_raw()))
+            h.lamp_cct.append(pop_raw())
+            h.lamp_cri.append(pop_raw())
+            h.lamp_watt.append(_to_float(pop_raw()))
 
         # Direct ratios (10 values)
         h.direct_ratios = pop_n_numbers(10)
