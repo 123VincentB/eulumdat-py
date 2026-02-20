@@ -13,7 +13,7 @@ from pyldt import LdtReader, LdtWriter
 
 def main():
     # --- Read ---
-    input_path = Path("sample.ldt")   # Replace with your actual .ldt file path
+    input_path = Path("tests/samples/sample2.ldt")   # Replace with your actual .ldt file path
 
     ldt = LdtReader.read(input_path)
     h = ldt.header

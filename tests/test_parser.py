@@ -11,9 +11,9 @@ Sample files expected in tests/samples/:
     sample4.ldt  — Zumtobel, Isym=4, Mc=24,  Ng=37,  N_sets=1
     sample5.ldt  — ERCO,     Isym=1, Mc=1,   Ng=91,  N_sets=1  (UTF-8 BOM)
     sample6.ldt  — TRILUX,   Isym=3, Mc=144, Ng=73,  N_sets=1  (empty lumcat)
-    sample7.ldt  — (empty),  Isym=0, Mc=360, Ng=181, N_sets=1  (empty company, dc=dg=1°)
-    sample8.ldt  — LEDiL Oy, Isym=0, Mc=72,  Ng=181, N_sets=1  (dg=1°)
-    sample9.ldt  — Signify,  Isym=4, Mc=72,  Ng=55,  N_sets=1  (long company, dg=0)
+    sample7.ldt  — (empty),  Isym=0, Mc=360, Ng=181, N_sets=1  (empty company, dc=dg=1°) -> TechnoTeam
+    sample8.ldt  — LEDiL,    Isym=0, Mc=72,  Ng=181, N_sets=1  (dg=1°)
+    sample9.ldt  — Philips,  Isym=4, Mc=72,  Ng=55,  N_sets=1  (long company, dg=0)
     sample10.ldt — Waldmann, Isym=4, Mc=24,  Ng=37,  N_sets=1
 """
 

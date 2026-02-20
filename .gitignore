@@ -35,3 +35,4 @@ Thumbs.db
 # Local test data (real .ldt files — do not commit)
 *.ldt
 !tests/samples/*.ldt
+tests/samples/*_modified.ldt
