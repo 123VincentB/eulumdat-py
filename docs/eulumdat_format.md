@@ -59,6 +59,8 @@ and the intensity table.
 >
 > The EULUMDAT format is **positional**: each piece of data must appear on the correct line, in the correct order. There is no key-value syntax, no delimiters between sections, and no tolerance for missing or reordered lines. A single missing line, extra blank line, or misplaced value will produce a file that DIALux, Relux, and other lighting software will reject or misinterpret — often without a meaningful error message.
 
+> **Real-world variations:** In practice, manufacturers do not always follow the spec strictly. Observed deviations include: empty `LUMINAIRE_NO` field (line 10), `NUM_LAMPS` set to `-1` (lamp not specified), free-form text in `LAMP_TYPE` such as `"1 x LED"`, and a UTF-8 BOM prepended to the file. A robust parser must tolerate empty text fields in lines 1–12 without skipping them.
+
 > **Note on line numbering:** Lines 1–26 are fixed. From line 27 onward, line
 > numbers shift depending on `N_SETS` (number of lamp sets). Each lamp set
 > occupies exactly 6 consecutive lines. With N sets, lamp data spans lines
@@ -206,7 +208,11 @@ Values are written one per line, sweeping all γ-angles for each C-plane in sequ
 ## Encoding
 
 EULUMDAT files use **ISO-8859-1** (Latin-1) encoding. `pyldt` reads files
-with `errors="ignore"` for robustness and writes in ISO-8859-1.
+in Latin-1 and writes in Latin-1.
+
+Some tools (notably ERCO's ilumetrix software) prepend a **UTF-8 BOM**
+(`0xEF 0xBB 0xBF`) to the file. `pyldt` detects and strips this BOM
+automatically before decoding.
 
 ---
 
