@@ -67,7 +67,7 @@ pyldt/
 │   └── basic_usage.py
 ├── tests/
 │   ├── test_parser.py
-│   └── test_writer.py
+│   └── samples/         ← .ldt test files (10 real manufacturer files)
 ├── docs/
 │   └── eulumdat_format.md
 ├── CHANGELOG.md
