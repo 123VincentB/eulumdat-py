@@ -50,6 +50,7 @@ def n_stored_planes(mc: int, isym: int) -> int:
 # ---------------------------------------------------------------------------
 
 @pytest.mark.parametrize("n", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+def test_read_no_exception(n):
     """LdtReader.read() must not raise on any sample file."""
     ldt = LdtReader.read(sample(n))
     assert ldt is not None
