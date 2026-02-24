@@ -24,7 +24,7 @@ Developed in an ISO 17025 accredited photometry laboratory.
 pip install eulumdat-py
 ```
 
-> Clone the repository and install locally:
+> For development or to access the examples:
 >
 > ```bash
 > git clone https://github.com/123VincentB/pyldt.git
