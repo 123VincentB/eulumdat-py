@@ -36,3 +36,5 @@ Thumbs.db
 *.ldt
 !tests/samples/*.ldt
 tests/samples/*_modified.ldt
+examples/*.png
+!examples/02_polar_diagram.png

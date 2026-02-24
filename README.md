@@ -54,6 +54,24 @@ print(f"Saved to: {saved}")
 
 ---
 
+## Examples
+
+| File | Description |
+|------|-------------|
+| [`examples/01_basic_usage.md`](examples/01_basic_usage.md) | Accessing header fields, lamp data and intensity values |
+| [`examples/01_basic_usage.py`](examples/01_basic_usage.py) | Runnable script for the above |
+| [`examples/02_polar_diagram.md`](examples/02_polar_diagram.md) | Plotting the polar intensity diagram (4 C-planes) |
+| [`examples/02_polar_diagram.py`](examples/02_polar_diagram.py) | Runnable script for the above (requires matplotlib) |
+
+Run any example from the repository root:
+
+```bash
+python examples/01_basic_usage.py
+python examples/02_polar_diagram.py
+```
+
+---
+
 ## Project structure
 
 ```
@@ -64,7 +82,10 @@ pyldt/
 │   ├── parser.py        ← LdtReader
 │   └── writer.py        ← LdtWriter
 ├── examples/
-│   └── basic_usage.py
+│   ├── 01_basic_usage.md
+│   ├── 01_basic_usage.py
+│   ├── 02_polar_diagram.md
+│   └── 02_polar_diagram.py
 ├── tests/
 │   ├── test_parser.py
 │   └── samples/         ← .ldt test files (10 real manufacturer files)
