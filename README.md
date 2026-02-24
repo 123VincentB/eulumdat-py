@@ -58,10 +58,10 @@ print(f"Saved to: {saved}")
 
 | File | Description |
 |------|-------------|
-| [`examples/01_basic_usage.md`](examples/01_basic_usage.md) | Accessing header fields, lamp data and intensity values |
-| [`examples/01_basic_usage.py`](examples/01_basic_usage.py) | Runnable script for the above |
-| [`examples/02_polar_diagram.md`](examples/02_polar_diagram.md) | Plotting the polar intensity diagram (4 C-planes) |
-| [`examples/02_polar_diagram.py`](examples/02_polar_diagram.py) | Runnable script for the above (requires matplotlib) |
+| [`examples/01_basic_usage.md`](https://github.com/123VincentB/pyldt/blob/main/examples/01_basic_usage.md) | Accessing header fields, lamp data and intensity values |
+| [`examples/01_basic_usage.py`](https://github.com/123VincentB/pyldt/blob/main/examples/01_basic_usage.py) | Runnable script for the above |
+| [`examples/02_polar_diagram.md`](https://github.com/123VincentB/pyldt/blob/main/examples/02_polar_diagram.md) | Plotting the polar intensity diagram (4 C-planes) |
+| [`examples/02_polar_diagram.py`](https://github.com/123VincentB/pyldt/blob/main/examples/02_polar_diagram.py) | Runnable script for the above (requires matplotlib) |
 
 Run any example from the repository root:
 
@@ -109,7 +109,7 @@ Key concepts:
 - **ISYM**: symmetry code that allows the file to store only a subset of C-planes
 - **Intensities**: tabulated in cd/klm (candela per kilolumen of lamp flux)
 
-See [`docs/eulumdat_format.md`](docs/eulumdat_format.md) for a detailed field-by-field description.
+See [`docs/eulumdat_format.md`](https://github.com/123VincentB/pyldt/blob/main/docs/eulumdat_format.md) for a detailed field-by-field description.
 
 ---
 
@@ -129,7 +129,7 @@ See [`docs/eulumdat_format.md`](docs/eulumdat_format.md) for a detailed field-by
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](https://github.com/123VincentB/pyldt/blob/main/LICENSE).
 
 ---
 
