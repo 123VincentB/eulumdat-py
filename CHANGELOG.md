@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.1.0] - 2026-02-18
+## [0.1.2] - 2026-02-24
 
 ### Added
 - `LdtReader.read()`: parse EULUMDAT files with full symmetry expansion (ISYM 0–4)
