@@ -21,10 +21,10 @@ Developed in an ISO 17025 accredited photometry laboratory.
 ## Installation
 
 ```bash
-pip install pyldt
+pip install eulumdat-py
 ```
 
-> Not yet published on PyPI. Clone the repository and install locally:
+> Clone the repository and install locally:
 >
 > ```bash
 > git clone https://github.com/123VincentB/pyldt.git

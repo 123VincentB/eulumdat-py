@@ -3,7 +3,7 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pyldt"
+name = "eulumdat-py"
 version = "0.1.0"
 description = "Python library for reading and writing EULUMDAT (.ldt) photometric files"
 readme = "README.md"
