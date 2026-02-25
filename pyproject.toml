@@ -4,17 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "eulumdat-py"
-version = "0.1.2"
+version = "0.1.3"
 description = "Python library for reading and writing EULUMDAT (.ldt) photometric files"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
     { name = "123VincentB" }
 ]
-keywords = ["photometry", "eulumdat", "ldt", "lighting", "luminaire", "ies"]
+keywords = ["photometry", "eulumdat", "ldt", "lighting", "luminaire", "ies", "dialux", "relux", "goniophotometry", "candela"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
@@ -22,6 +23,8 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering",
+    "Topic :: File Formats",
 ]
 requires-python = ">=3.9"
 dependencies = []
@@ -29,7 +32,9 @@ dependencies = []
 [project.urls]
 Homepage = "https://github.com/123VincentB/pyldt"
 Repository = "https://github.com/123VincentB/pyldt"
+Documentation = "https://github.com/123VincentB/pyldt/blob/main/docs/eulumdat_format.md"
 Changelog = "https://github.com/123VincentB/pyldt/blob/main/CHANGELOG.md"
+"Bug Tracker" = "https://github.com/123VincentB/pyldt/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]

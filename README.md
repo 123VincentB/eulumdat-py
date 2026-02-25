@@ -1,5 +1,9 @@
 # pyldt
 
+[![PyPI](https://img.shields.io/pypi/v/eulumdat-py)](https://pypi.org/project/eulumdat-py/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eulumdat-py)](https://pypi.org/project/eulumdat-py/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/123VincentB/pyldt/blob/main/LICENSE)
+
 A Python library for reading and writing **EULUMDAT** (`.ldt`) photometric files — the standard format for luminaire intensity distribution data used in lighting design and photometric testing.
 
 Developed in an ISO 17025 accredited photometry laboratory.
