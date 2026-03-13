@@ -78,16 +78,14 @@ class LdtReader:
                 copy_row(i, 0)
 
         elif h.isym == 2:
-            # Symmetry about vertical plane C0-C180
             half = mc // 2 + 1
             for i in range(half):
                 copy_row(i, i)
-            for k in range(1, mc - half + 1):
-                full[half - 1 + k] = list(full[half - k])
+            # Mirror of index i for ISYM=2 is mc-i
+            for i in range(1, half - 1):
+                full[mc - i] = list(full[i])
 
         elif h.isym == 3:
-            # Symmetry about plane C90-C270
-            # File stores planes from C270 down to C90 (decreasing order)
             step = 360.0 / mc if mc else 0.0
             angle_to_idx = {round(a % 360.0, 6): i
                             for i, a in enumerate(h.c_angles)} if h.c_angles else {}
@@ -97,19 +95,24 @@ class LdtReader:
                 return angle_to_idx.get(a, int(round((a / 360.0) * mc)) % mc)
 
             n = mc // 2 + 1
-            start = 270.0  # Starts at C270
+            start = 270.0
             order = [idx_for_angle(start - k * step) for k in range(n)]
 
             for si, ci in enumerate(order):
                 copy_row(ci, si)
 
-            # Fill missing planes by symmetry
+            # Mirror of C for ISYM=3 is (180° - C) mod 360°
             for k in range(mc):
                 if full[k] == [0.0] * ng:
-                    full[k] = list(full[(k + mc // 2) % mc])
+                    c_k = round(k * step % 360.0, 6)
+                    c_mirror = round((180.0 - c_k) % 360.0, 6)
+                    mirror_idx = angle_to_idx.get(
+                        c_mirror,
+                        int(round(c_mirror / step)) % mc
+                    )
+                    full[k] = list(full[mirror_idx])
 
         elif h.isym == 4:
-            # Quadrant symmetry
             q = mc // 4 + 1
             for i in range(q):
                 copy_row(i, i)

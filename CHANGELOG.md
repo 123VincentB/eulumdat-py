@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.1.4] - 2026-03-13
+
+### Fixed
+- `parser.py`: correct C-plane expansion for ISYM=2 (`_expand_to_full_matrix`)
+  — mirror of index `i` is `mc-i`, not `half-1+(half-i)` (#1)
+- `parser.py`: correct C-plane expansion for ISYM=3 (`_expand_to_full_matrix`)
+  — mirror of C is `(180°-C) mod 360°`, not `(C+180°) mod 360°` (#1)
+
+---
+
 ## [0.1.3] - 2026-02-25
 
 ### Added
