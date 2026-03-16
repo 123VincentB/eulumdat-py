@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.0] - 2026-03-16
+
+### Changed
+- Version bump to 1.0.0 — stable release following validation on 42 real manufacturer LDT files
+
+---
+
 ## [0.1.4] - 2026-03-13
 
 ### Fixed
