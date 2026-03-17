@@ -1,4 +1,4 @@
-# pyldt — Basic usage
+# eulumdat-py — Basic usage
 
 This example shows how to read an EULUMDAT file and access the most common fields.
 

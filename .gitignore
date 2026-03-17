@@ -38,3 +38,5 @@ Thumbs.db
 tests/samples/*_modified.ldt
 examples/*.png
 !examples/02_polar_diagram.png
+
+CONTEXT_pyldt.md

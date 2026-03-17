@@ -30,11 +30,11 @@ requires-python = ">=3.9"
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/123VincentB/pyldt"
-Repository = "https://github.com/123VincentB/pyldt"
-Documentation = "https://github.com/123VincentB/pyldt/blob/main/docs/eulumdat_format.md"
-Changelog = "https://github.com/123VincentB/pyldt/blob/main/CHANGELOG.md"
-"Bug Tracker" = "https://github.com/123VincentB/pyldt/issues"
+Homepage = "https://github.com/123VincentB/eulumdat-py"
+Repository = "https://github.com/123VincentB/eulumdat-py"
+Documentation = "https://github.com/123VincentB/eulumdat-py/blob/main/docs/eulumdat_format.md"
+Changelog = "https://github.com/123VincentB/eulumdat-py/blob/main/CHANGELOG.md"
+"Bug Tracker" = "https://github.com/123VincentB/eulumdat-py/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]

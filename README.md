@@ -1,8 +1,8 @@
-# pyldt
+# eulumdat-py
 
 [![PyPI](https://img.shields.io/pypi/v/eulumdat-py)](https://pypi.org/project/eulumdat-py/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eulumdat-py)](https://pypi.org/project/eulumdat-py/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/123VincentB/pyldt/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/123VincentB/eulumdat-py/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/1160770398.svg)](https://doi.org/10.5281/zenodo.18768894)
 
 A Python library for reading and writing **EULUMDAT** (`.ldt`) photometric files — the standard format for luminaire intensity distribution data used in lighting design and photometric testing.
@@ -32,8 +32,8 @@ pip install eulumdat-py
 > For development or to access the examples:
 >
 > ```bash
-> git clone https://github.com/123VincentB/pyldt.git
-> cd pyldt
+> git clone https://github.com/123VincentB/eulumdat-py.git
+> cd eulumdat-py
 > pip install -e .
 > ```
 
@@ -63,10 +63,10 @@ print(f"Saved to: {saved}")
 
 | File | Description |
 |------|-------------|
-| [`examples/01_basic_usage.md`](https://github.com/123VincentB/pyldt/blob/main/examples/01_basic_usage.md) | Accessing header fields, lamp data and intensity values |
-| [`examples/01_basic_usage.py`](https://github.com/123VincentB/pyldt/blob/main/examples/01_basic_usage.py) | Runnable script for the above |
-| [`examples/02_polar_diagram.md`](https://github.com/123VincentB/pyldt/blob/main/examples/02_polar_diagram.md) | Plotting the polar intensity diagram (4 C-planes) |
-| [`examples/02_polar_diagram.py`](https://github.com/123VincentB/pyldt/blob/main/examples/02_polar_diagram.py) | Runnable script for the above (requires matplotlib) |
+| [`examples/01_basic_usage.md`](https://github.com/123VincentB/eulumdat-py/blob/main/examples/01_basic_usage.md) | Accessing header fields, lamp data and intensity values |
+| [`examples/01_basic_usage.py`](https://github.com/123VincentB/eulumdat-py/blob/main/examples/01_basic_usage.py) | Runnable script for the above |
+| [`examples/02_polar_diagram.md`](https://github.com/123VincentB/eulumdat-py/blob/main/examples/02_polar_diagram.md) | Plotting the polar intensity diagram (4 C-planes) |
+| [`examples/02_polar_diagram.py`](https://github.com/123VincentB/eulumdat-py/blob/main/examples/02_polar_diagram.py) | Runnable script for the above (requires matplotlib) |
 
 Run any example from the repository root:
 
@@ -80,7 +80,7 @@ python examples/02_polar_diagram.py
 ## Project structure
 
 ```
-pyldt/
+eulumdat-py/
 ├── pyldt/
 │   ├── __init__.py      ← Public API
 │   ├── model.py         ← LdtHeader, Ldt dataclasses
@@ -114,7 +114,7 @@ Key concepts:
 - **ISYM**: symmetry code that allows the file to store only a subset of C-planes
 - **Intensities**: tabulated in cd/klm (candela per kilolumen of lamp flux)
 
-See [`docs/eulumdat_format.md`](https://github.com/123VincentB/pyldt/blob/main/docs/eulumdat_format.md) for a detailed field-by-field description.
+See [`docs/eulumdat_format.md`](https://github.com/123VincentB/eulumdat-py/blob/main/docs/eulumdat_format.md) for a detailed field-by-field description.
 
 ---
 
@@ -134,7 +134,7 @@ See [`docs/eulumdat_format.md`](https://github.com/123VincentB/pyldt/blob/main/d
 
 ## License
 
-MIT — see [LICENSE](https://github.com/123VincentB/pyldt/blob/main/LICENSE).
+MIT — see [LICENSE](https://github.com/123VincentB/eulumdat-py/blob/main/LICENSE).
 
 ---
 

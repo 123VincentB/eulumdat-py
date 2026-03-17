@@ -1,4 +1,4 @@
-# pyldt — Plotting the polar intensity diagram
+# eulumdat-py — Plotting the polar intensity diagram
 
 This example plots the four principal C-planes (C=0°, 90°, 180°, 270°)
 as a polar intensity diagram.
