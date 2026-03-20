@@ -39,5 +39,8 @@ Changelog = "https://github.com/123VincentB/eulumdat-py/blob/main/CHANGELOG.md"
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
